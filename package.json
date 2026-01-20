@@ -1,0 +1,42 @@
+{
+  "name": "aselect",
+  "version": "1.0.0",
+  "description": "Advanced select plugin with AJAX support",
+  "main": "dist/aselect.cjs.js",
+  "module": "dist/aselect.esm.js",
+  "browser": "dist/aselect.umd.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w",
+    "build:prod": "set NODE_ENV=production && rollup -c",
+    "clean": "rimraf dist"
+  },
+  "peerDependencies": {
+    "@popperjs/core": "^2.0.0",
+    "bootstrap": "^5.0.0",
+    "jquery": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/preset-env": "^7.22.20",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "core-js": "^3.47.0",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "keywords": [
+    "select",
+    "dropdown",
+    "ajax",
+    "jquery-plugin"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
