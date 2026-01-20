@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<select id="countrySelect" class="form-select">
+    <option value="">-- Select Country --</option>
+    <option value="1" data-name="Canada" data-code="CA">Canada</option>
+    <option value="2" data-name="India" data-code="IN">India</option>
+</select>
+
+<script>
+    $('#countrySelect').aSelect({
+        headers: ['name', 'code']
+    });
+</script>

@@ -1,5 +1,5 @@
 {
-  "name": "aselect",
+  "name": "@amrit-maan/aselect",
   "version": "1.0.0",
   "description": "Advanced select plugin with AJAX support",
   "main": "dist/aselect.cjs.js",
