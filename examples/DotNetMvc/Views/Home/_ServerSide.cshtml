@@ -1,0 +1,311 @@
+﻿<!-- Server-side Data -->
+<section id="api" class="section border-top my-5 py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <h2 class="section-title">Server-side Data</h2>
+                <p class="text-muted">
+                    For large datasets, load data from the server by providing a URL.
+                </p>
+                <p class="text-muted">
+                    <strong>Note:</strong> The code below uses a <strong>C# ASP.NET Core</strong> backend implementation and is just a sample example.
+                </p>
+            </div>
+        </div>
+
+        <p>
+            Below is a structured approach showing how I handled server-side dropdown loading.
+            Your implementation may vary.
+        </p>
+
+        <p>
+            I initially have:
+        </p>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0">Initialization Script</h5>
+                    <button type="button"
+                            class="btn btn-sm btn-outline-secondary copy-btn"
+                            data-copy-target="init-script">
+                        <i class="bi bi-clipboard me-1"></i>Copy
+                    </button>
+                </div>
+
+                <pre id="init-script"><code>
+&lt;script&gt;
+    function initializePlugins($context) {
+        $context.find('select.aSelect').each(function () {
+            $(this).aSelect(); // if aSelect is already initialized, aSelect ignores this.
+        });
+    }
+
+    $(document).ready(function () {
+        initializePlugins($(document));
+    });
+
+    // Run after every jQuery AJAX request completes
+    $(document).ajaxComplete(function () {
+        initializePlugins($(document));
+    });
+&lt;/script&gt;
+                </code></pre>
+            </div>
+        </div>
+
+        <p>
+            Now any code that contains aSelect will be initialized automatically.
+            No need to manually call it every time.
+            Next, we will utilize aSelect data-attributes to set up and fetch dropdown data.
+        </p>
+
+        <p>
+            Let’s define a DTO first:
+        </p>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0">Dropdown DTO</h5>
+                    <button type="button"
+                            class="btn btn-sm btn-outline-secondary copy-btn"
+                            data-copy-target="dropdown-dto">
+                        <i class="bi bi-clipboard me-1"></i>Copy
+                    </button>
+                </div>
+
+                <pre id="dropdown-dto"><code>
+public class DropdownDTO
+{
+    public string chDropdownId { get; set; }
+    public string nvcSqlQuery { get; set; }
+    public bool bitImplementPagination { get; set; }
+    public string vcValColumn { get; set; }
+    public string vcTextColumn { get; set; }
+    public string vcSkippedColumns { get; set; }
+    public string vcSkippedSearchColumns { get; set; }
+    public Dictionary<string, string> ColumnMappings { get; set; }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <p>
+            Define all dropdowns in a central place.
+            Use a static class <strong>DropdownRepository</strong> to return DTO based on dropdown id.
+        </p>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0">Dropdown Repository</h5>
+                    <button type="button"
+                            class="btn btn-sm btn-outline-secondary copy-btn"
+                            data-copy-target="dropdown-repo">
+                        <i class="bi bi-clipboard me-1"></i>Copy
+                    </button>
+                </div>
+
+                <pre id="dropdown-repo"><code>
+using DotNetMvc.DTOs;
+
+namespace DotNetMvc.Repository
+{
+    public class DropdownRepository
+    {
+        public List<DropdownDTO> GetAllDropdown()
+        {
+            return new List<DropdownDTO>()
+            {
+                new DropdownDTO
+                {
+                    chDropdownId = "Order",
+                    nvcSqlQuery = "SELECT [idOrderId], vcOrderNo , decPrice, vcCustomerName as vcCustomer FROM Order WHERE {{filters}} AND bitActive = 1 ORDER BY vcCompanyName",
+                    bitImplementPagination = true,
+                    vcValColumn = "idOrderId",
+                    vcTextColumn = "vcOrderNo",
+                    vcSkippedColumns = "idOrderId",
+                    ColumnMappings = new Dictionary<string, string>()
+                    {
+                        ["vcCustomer"] = "vcCustomerName"
+                    }
+                }
+            };
+        }
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <p>Add in server provider:</p>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0">Service Registration</h5>
+                    <button type="button"
+                            class="btn btn-sm btn-outline-secondary copy-btn"
+                            data-copy-target="service-register">
+                        <i class="bi bi-clipboard me-1"></i>Copy
+                    </button>
+                </div>
+
+                <pre id="service-register"><code>
+builder.Services.AddSingleton<DropdownRepository>();
+                </code></pre>
+            </div>
+        </div>
+
+        <p>
+            Now build an endpoint to serve dropdown data.
+            Here is a controller example:
+        </p>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0">Common Controller</h5>
+                    <button type="button"
+                            class="btn btn-sm btn-outline-secondary copy-btn"
+                            data-copy-target="common-controller">
+                        <i class="bi bi-clipboard me-1"></i>Copy
+                    </button>
+                </div>
+
+                <pre id="common-controller"><code>
+using DotNetMvc.DTOs;
+using DotNetMvc.Repository;
+using Microsoft.AspNetCore.Mvc;
+namespace DotNetMvc.Controllers;
+
+public class CommonController(DropdownRepository dropDownRepo) : Controller
+{
+    public async Task<JsonResult> Dropdown(string id, string search, string start, string length, string valColumn, string selectedValue, bool onlyFetchSelectedRow, bool initialLoad, List<string> headers, Dictionary<string, string> dependsOn)
+    {
+        // Logic to handle dropdown data fetching using dropDownRepo
+        List<DropdownDTO> listAllDropdowns = dropDownRepo.GetAllDropdown();
+        DropdownDTO dropdown = listAllDropdowns.First(x => x.chDropdownId == id);
+
+        List<Dictionary<string, object>> data = null; // TODO: Implement your logic. I am leaving this intentionally.. your should know how you should fetch your data.
+        Dictionary<string, object> selectedRow = null;
+
+        if (onlyFetchSelectedRow)
+        {
+            if (string.IsNullOrEmpty(selectedValue))
+            {
+                throw new InvalidOperationException("Select value cannot be empty");
+            }
+
+
+            string sql = dropdown.nvcSqlQuery.Replace("{{filters}}", $"({dropdown.vcValColumn} = @@valColumn)"); // this is okay as we in the backend control what is the dropdown.vcValColumn...
+
+            var parameters = new Dictionary<string, dynamic>
+            {
+                { "@@valColumn", selectedValue },
+            };
+            foreach (var kv in dependsOn)
+            {
+                parameters[kv.Key] = kv.Value;
+            }
+            selectedRow = null; // TODO: Implement your logic. I am leaving this intentionally.. your should know how you should fetch your data. This should be return if onlyFetchSelectedRow is true. This maybe a Db repo Call
+        }
+        else
+        {
+            data = null; // TODO: Implement your logic. I am leaving this intentionally.. your should know how you should fetch your data.  This maybe a Db repo Call
+        }
+        return Json(new { data, selectedRow, dropdown.vcValColumn, dropdown.vcTextColumn, dropdown.bitImplementPagination, dropdown.vcSkippedColumns });
+    }
+}
+
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="row g-4 align-items-start">
+
+            <!-- Server-side markup -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">HTML</h5>
+                        <p class="text-muted small">
+                            Add <code>data-url</code> to the select.
+                        </p>
+
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="server-html">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+
+                        <pre id="server-html"><code>
+&lt;select
+    name="orders"
+    class="form-select aSelect"
+    data-url="/Common/Dropdown/Orders"&gt;
+&lt;/select&gt;
+                        </code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Server-side init -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">Initialize</h5>
+                        <p class="text-muted small">
+                            Initialize normally. The plugin will fetch rows from the endpoint.
+                        </p>
+
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="server-init">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+
+                        <pre id="server-init"><code>$('.aSelect').aSelect();</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Response format -->
+            <div class="col-lg-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0">Server response format</h5>
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="server-response">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+
+                        <pre id="server-response"><code>{
+  "bitImplementPagination": true,
+  "vcSkippedColumns": "id,category",
+  "vcTextColumn": "name",
+  "vcValColumn": "id",
+  "data": [
+    {"id": 1, "name": "Product A", "price": 19.99, "category": "Electronics"},
+    {"id": 2, "name": "Product B", "price": 29.99, "category": "Clothing"}
+  ]
+}</code></pre>
+
+                        <div class="alert alert-light small mb-0">
+                            <strong>Tip:</strong> Use <code>vcSkippedColumns</code> to hide fields you don’t want displayed as columns.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
