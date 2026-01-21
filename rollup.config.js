@@ -7,7 +7,6 @@ import autoprefixer from "autoprefixer";
 import cssnano from "cssnano";
 
 const input = "src/index.js";
-const isProd = process.env.NODE_ENV === "production";
 
 const globals = {
   jquery: "jQuery",
@@ -17,21 +16,21 @@ const globals = {
 
 const external = ["jquery", "@popperjs/core", "bootstrap"];
 
-const basePlugins = [
+const base = {
+  input,
+  external,
+};
+
+/* ---------------- NORMAL BUILD ---------------- */
+
+const normalPlugins = [
   resolve(),
   commonjs(),
-
   postcss({
-    extract: "aselect.min.css",
-    minimize: true,
-    plugins: [
-      autoprefixer(),
-      cssnano({
-        preset: "default",
-      }),
-    ],
+    extract: "aselect.css",
+    minimize: false,
+    plugins: [autoprefixer()],
   }),
-
   babel({
     babelHelpers: "bundled",
     exclude: "node_modules/**",
@@ -39,37 +38,55 @@ const basePlugins = [
   }),
 ];
 
-export default [
-  {
-    input,
-    output: {
-      file: "dist/aselect.cjs.js",
-      format: "cjs",
-    },
-    external,
-    plugins: basePlugins,
-  },
-  {
-    input,
-    output: {
-      file: "dist/aselect.esm.js",
-      format: "esm",
-    },
-    external,
-    plugins: basePlugins,
-  },
-  {
-    input,
-    output: {
-      file: "dist/aselect.umd.js",
-      format: "umd",
-      name: "ASelect",
-      globals,
-    },
-    external,
+/* ---------------- MINIFIED BUILD ---------------- */
+
+const minPlugins = [
+  resolve(),
+  commonjs(),
+  postcss({
+    extract: "aselect.min.css",
+    minimize: true,
     plugins: [
-      ...basePlugins,
-      isProd && terser(),
-    ].filter(Boolean),
+      autoprefixer(),
+      cssnano({ preset: "default" }),
+    ],
+  }),
+  babel({
+    babelHelpers: "bundled",
+    exclude: "node_modules/**",
+    babelrc: true,
+  }),
+  terser(),
+];
+
+export default [
+  // Normal
+  {
+    ...base,
+    plugins: normalPlugins,
+    output: [
+      { file: "dist/aselect.cjs.js", format: "cjs" },
+      { file: "dist/aselect.esm.js", format: "esm" },
+      {
+        file: "dist/aselect.umd.js",
+        format: "umd",
+        name: "ASelect",
+        globals,
+      },
+    ],
+  },
+
+  // Minified
+  {
+    ...base,
+    plugins: minPlugins,
+    output: [
+      {
+        file: "dist/aselect.umd.min.js",
+        format: "umd",
+        name: "ASelect",
+        globals,
+      },
+    ],
   },
 ];
