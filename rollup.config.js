@@ -1,9 +1,13 @@
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import babel from "@rollup/plugin-babel";
-import { terser } from "rollup-plugin-terser";
+import terser from "@rollup/plugin-terser";
+import postcss from "rollup-plugin-postcss";
+import autoprefixer from "autoprefixer";
+import cssnano from "cssnano";
 
 const input = "src/index.js";
+const isProd = process.env.NODE_ENV === "production";
 
 const globals = {
   jquery: "jQuery",
@@ -13,6 +17,26 @@ const globals = {
 
 const external = ["jquery", "@popperjs/core", "bootstrap"];
 
+const basePlugins = [
+  resolve(),
+  commonjs(),
+
+  postcss({
+    extract: "aselect.css",
+    minimize: isProd,
+    plugins: [
+      autoprefixer(),
+      isProd && cssnano(),
+    ].filter(Boolean),
+  }),
+
+  babel({
+    babelHelpers: "bundled",
+    exclude: "node_modules/**",
+    babelrc: true,
+  }),
+];
+
 export default [
   {
     input,
@@ -21,15 +45,7 @@ export default [
       format: "cjs",
     },
     external,
-    plugins: [
-      resolve(),
-      commonjs(),
-      babel({
-        babelHelpers: "bundled",
-        exclude: "node_modules/**",
-        babelrc: true,
-      }),
-    ],
+    plugins: basePlugins,
   },
   {
     input,
@@ -38,15 +54,7 @@ export default [
       format: "esm",
     },
     external,
-    plugins: [
-      resolve(),
-      commonjs(),
-      babel({
-        babelHelpers: "bundled",
-        exclude: "node_modules/**",
-        babelrc: true,
-      }),
-    ],
+    plugins: basePlugins,
   },
   {
     input,
@@ -58,14 +66,8 @@ export default [
     },
     external,
     plugins: [
-      resolve(),
-      commonjs(),
-      babel({
-        babelHelpers: "bundled",
-        exclude: "node_modules/**",
-        babelrc: true,
-      }),
-      terser(),
-    ],
+      ...basePlugins,
+      isProd && terser(),
+    ].filter(Boolean),
   },
 ];

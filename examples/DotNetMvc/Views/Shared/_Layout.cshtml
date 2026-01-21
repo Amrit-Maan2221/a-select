@@ -3,50 +3,126 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - DotNetMvc</title>
-    <script type="importmap"></script>
+    <title>@ViewData["Title"] - aSelect</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+          crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Plugin + Site CSS -->
+    <link rel="stylesheet" href="~/aselect.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/DotNetMvc.styles.css" asp-append-version="true" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="@("https://unpkg.com/@popperjs/core@2")"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/aselect.umd.js"></script>
+    <link rel="stylesheet" href="~/Demo.styles.css" asp-append-version="true" />
+
+    <meta name="theme-color" content="#0d6efd" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DotNetMvc</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+
+<body class="app-body">
+    <header class="app-header">
+        <!-- IMPORTANT: keep sticky on header wrapper too -->
+        <div class="app-sticky-nav">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+                <div class="container">
+                    <a class="navbar-brand d-flex align-items-center gap-2" asp-controller="Home" asp-action="Index">
+                        <span class="app-logo">aS</span>
+                        <span class="fw-semibold">aSelect</span>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav"
+                            aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="topNav">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#install">Install</a></li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Usage
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#usage">Basic Usage</a></li>
+                                    <li><a class="dropdown-item" href="#usage-table">Grid / Table Layout</a></li>
+                                    <li><a class="dropdown-item" href="#api">Server-side Data</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#multiselect">Multi-select</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Reference
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#options">Options</a></li>
+                                    <li><a class="dropdown-item" href="#methods">Methods</a></li>
+                                    <li><a class="dropdown-item" href="#events">Events</a></li>
+                                    <li><a class="dropdown-item" href="#advanced">Advanced</a></li>
+                                    <li><a class="dropdown-item" href="#keyboard">Keyboard</a></li>
+                                    <li><a class="dropdown-item" href="#styling">Styling</a></li>
+                                    <li><a class="dropdown-item" href="#compatibility">Compatibility</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <div class="d-flex gap-2 align-items-center">
+                            <a class="btn btn-primary btn-sm" href="#install">
+                                <i class="bi bi-download me-1"></i>Get Started
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="app-main">
+        @RenderBody()
+    </main>
+
+    <footer class="app-footer border-top bg-white">
+        <div class="container py-4">
+            <div class="row g-3 align-items-center">
+                <div class="col-md-6">
+                    <div class="text-muted small">&copy; @DateTime.Now.Year - aSelect</div>
+                    <div class="text-muted small">Built with ASP.NET Core MVC + Bootstrap</div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a class="link-secondary small me-3" href="#overview">Overview</a>
+                    <a class="link-secondary small me-3" href="#options">Options</a>
+                    <a class="link-secondary small me-3" href="#api">Server-side</a>
+                    <a class="link-secondary small" href="#compatibility">Compatibility</a>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - DotNetMvc - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+
+    <!-- ✅ Use Bootstrap Bundle (includes Popper) -->
+    <script src="@("https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js")"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JS (NOT bundle) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+            integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+            crossorigin="anonymous"></script>
+
+    <script src="~/aselect.umd.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

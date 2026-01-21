@@ -1,203 +1,224 @@
-import $ from "jquery";
-import Popper from "@popperjs/core";
-import "bootstrap";
-import './aselect.css';
-
-// Store original val function
-const originalVal = $.fn.val;
-$.fn.val = function (value) {
-    if (value === undefined) {
-        return originalVal.call(this);
-    }
-    return this.each(function () {
-        const instance = $(this).data("aselect");
-        if (instance) {
-            instance.selectRow(value, false);
-        } else {
-            originalVal.call($(this), value);
-        }
-    });
-};
-
-/** ------------------------
- *  UTILITIES
- *  ----------------------*/
-function generateUniqueId(prefix = "a-select-") {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    return (
-        prefix +
-        Array.from({ length: 8 }, () =>
-            chars.charAt(Math.floor(Math.random() * chars.length))
-        ).join("")
-    );
-}
-
-function scrollIntoView($el, $container, animate = true) {
-    if (!$el.length) return;
-    const elTop = $el.position().top;
-    const elHeight = $el.outerHeight() * 3;
-    const containerHeight = $container.height();
-    const currentScroll = $container.scrollTop();
-    let targetScroll = null;
-
-    if (elTop + elHeight > containerHeight + currentScroll) {
-        targetScroll = elTop + elHeight - containerHeight;
-    } else if (currentScroll > 0 && elTop - elHeight < currentScroll) {
-        targetScroll = Math.max(elTop - elHeight, 0);
-    }
-
-    if (targetScroll !== null) {
-        animate
-            ? $container.stop().animate({ scrollTop: targetScroll }, 100)
-            : $container.scrollTop(targetScroll);
-    }
-}
-
-function convertCamelNotationToSentence(str) {
-    if (!str) return "";
-    const trimmed = str.replace(/^[a-z]+/, ""); // Remove the first word (everything before the first uppercase letter)
-    const sentence = trimmed.replace(/([A-Z])/g, " $1").trim(); // Insert space before each uppercase letter
-    return sentence;
-}
-
-function showTooltip($el, text) {
-    if ($el && $el.length) {
-        hideTooltip($el);
-
-        $el
-            .attr("data-bs-toggle", "tooltip")
-            .attr("title", text)
-            .tooltip("dispose") // Dispose any existing tooltip
-            .tooltip({
-                placement: "bottom",
-                trigger: "hover", // Show on hover
-            });
-    } else {
-        console.warn("Element does not exist in DOM", $el);
-    }
-}
-
-function hideTooltip($el) {
-    if ($el && $el.length) {
-        $el.tooltip("dispose");
-        $el.removeAttr("data-bs-toggle").removeAttr("title");
-    } else {
-        console.warn("Element does not exist in DOM", $el);
-    }
-}
-
-function getScrollableParents($ctx) {
-    return $ctx.parents().filter(function () {
-        return (
-            $(this).css("overflow") === "auto" ||
-            $(this).css("overflow-y") === "scroll" ||
-            $(this).css("overflow-x") === "scroll"
+﻿(function (factory) {
+    if (typeof define === "function" && define.amd) {
+        // AMD
+        define(["jquery", "popper.js", "bootstrap"], factory);
+    } else if (typeof module === "object" && module.exports) {
+        // CommonJS
+        module.exports = factory(
+            require("jquery"),
+            require("@popperjs/core"),
+            require("bootstrap")
         );
-    });
-}
-
-/** ------------------------
- *  CONFIGURATION
- *  ----------------------*/
-
-
-
-const dataAttrs = {
-    instance: "aselect",
-    quickLinks: "data-quicklink",
-    showClearButton: "data-show-clear-button",
-    headers: "data-headers",
-    ajaxUrl: "data-url",
-    uniqueBy: "data-unique-by",
-    creatable: "data-creatable",
-    dependsOn: "data-depends-on",
-    hideExcluded: "data-hide-excluded",
-    multiple: "multiple"
-}
-
-$.fn.aSelect = function (options) {
-    if (typeof options === 'string') {
-        const method = options;
+    } else {
+        // Browser globals
+        factory(jQuery, window.Popper, bootstrap);
+    }
+})(function ($, Popper, bootstrap) {
+    "use strict";
+    if (!$) {
+        throw new Error("This plugin requires jQuery");
+    }
+    if (!Popper) {
+        throw new Error("This plugin requires Popper.js");
+    }
+    if (typeof bootstrap === "undefined") {
+        console.warn("Bootstrap JS not detected — some features may not work.");
+    }
+    // Store original val function
+    const originalVal = $.fn.val;
+    $.fn.val = function (value) {
+        if (value === undefined) {
+            return originalVal.call(this);
+        }
         return this.each(function () {
-            const instance = $(this).data(dataAttrs.instance);
-            if (instance && typeof instance[method] === 'function') {
-                instance[method]();
+            const instance = $(this).data("aselect");
+            if (instance) {
+                instance.selectRow(value, false);
+            } else {
+                originalVal.call($(this), value);
             }
+        });
+    };
+
+    /** ------------------------
+     *  UTILITIES
+     *  ----------------------*/
+    function generateUniqueId(prefix = "a-select-") {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        return (
+            prefix +
+            Array.from({ length: 8 }, () =>
+                chars.charAt(Math.floor(Math.random() * chars.length))
+            ).join("")
+        );
+    }
+
+    function scrollIntoView($el, $container, animate = true) {
+        if (!$el.length) return;
+        const elTop = $el.position().top;
+        const elHeight = $el.outerHeight() * 3;
+        const containerHeight = $container.height();
+        const currentScroll = $container.scrollTop();
+        let targetScroll = null;
+
+        if (elTop + elHeight > containerHeight + currentScroll) {
+            targetScroll = elTop + elHeight - containerHeight;
+        } else if (currentScroll > 0 && elTop - elHeight < currentScroll) {
+            targetScroll = Math.max(elTop - elHeight, 0);
+        }
+
+        if (targetScroll !== null) {
+            animate
+                ? $container.stop().animate({ scrollTop: targetScroll }, 100)
+                : $container.scrollTop(targetScroll);
+        }
+    }
+
+    function convertCamelNotationToSentence(str) {
+        if (!str) return "";
+        const trimmed = str.replace(/^[a-z]+/, ""); // Remove the first word (everything before the first uppercase letter)
+        const sentence = trimmed.replace(/([A-Z])/g, " $1").trim(); // Insert space before each uppercase letter
+        return sentence;
+    }
+
+    function showTooltip($el, text) {
+        if ($el && $el.length) {
+            hideTooltip($el);
+
+            $el
+                .attr("data-bs-toggle", "tooltip")
+                .attr("title", text)
+                .tooltip("dispose") // Dispose any existing tooltip
+                .tooltip({
+                    placement: "bottom",
+                    trigger: "hover", // Show on hover
+                });
+        } else {
+            console.warn("Element does not exist in DOM", $el);
+        }
+    }
+
+    function hideTooltip($el) {
+        if ($el && $el.length) {
+            $el.tooltip("dispose");
+            $el.removeAttr("data-bs-toggle").removeAttr("title");
+        } else {
+            console.warn("Element does not exist in DOM", $el);
+        }
+    }
+
+    function getScrollableParents($ctx) {
+        return $ctx.parents().filter(function () {
+            return (
+                $(this).css("overflow") === "auto" ||
+                $(this).css("overflow-y") === "scroll" ||
+                $(this).css("overflow-x") === "scroll"
+            );
         });
     }
 
-    const defaultOptions = $.fn.aSelect.defaults || {};
-    const settings = $.extend(
-        {
-            onOpen: null,
-            uniqueBy: [],
-            onClose: null,
-            onChange: null,
-            showClearButton: false,
-            quickLinks: "",
-            dependsOn: [],
-            ajaxUrl: null,
-            headers: [],
-            creatable: false,
-            hideExcluded: true,
-            placeHolder: "-- Select --",
-            getAjaxDefaultPayload: () => ({}),
-            id: generateUniqueId(),
-        },
-        defaultOptions,
-        options
-    );
-    return this.each(function () {
-        const $select = $(this);
-        if (!$select.data(dataAttrs.instance)) {
-            if ($select.attr(dataAttrs.quickLinks)) {
-                settings.quickLinks = $($select.attr(dataAttrs.quickLinks)).prop("outerHTML");
-            }
-            if ($select.attr(dataAttrs.showClearButton)) {
-                settings.showClearButton = $select.attr(dataAttrs.showClearButton) == "true";
-            }
+    /** ------------------------
+     *  CONFIGURATION
+     *  ----------------------*/
 
-            if ($select.attr(dataAttrs.headers)) {
-                settings.headers = $select.attr(dataAttrs.headers).split(",").map(h => h.trim());
-            }
 
-            if ($select.attr(dataAttrs.ajaxUrl)) {
-                settings.ajaxUrl = $select.attr(dataAttrs.ajaxUrl);
-            }
 
-            if ($select.attr(dataAttrs.uniqueBy)) {
-                settings.uniqueBy = $select.attr(dataAttrs.uniqueBy).split(",").map(h => h.trim());
-            }
+    const dataAttrs = {
+        instance: "aselect",
+        quickLinks: "data-quicklink",
+        showClearButton: "data-show-clear-button",
+        headers: "data-headers",
+        ajaxUrl: "data-url",
+        uniqueBy: "data-unique-by",
+        creatable: "data-creatable",
+        dependsOn: "data-depends-on",
+        hideExcluded: "data-hide-excluded",
+        multiple: "multiple"
+    }
 
-            if ($select.attr(dataAttrs.creatable)) {
-                settings.creatable = $select.attr(dataAttrs.creatable) == "true";
-            }
-
-            if ($select.attr(dataAttrs.hideExcluded)) {
-                settings.hideExcluded = $select.attr(dataAttrs.hideExcluded) == "true";
-            }
-
-            if ($select.attr(dataAttrs.multiple)) {
-                settings.multiple = $select.prop(dataAttrs.multiple);
-            }
-
-            let dependOnAttr = $select.attr(dataAttrs.dependsOn);
-            if (dependOnAttr) {
-                settings.dependsOn = JSON.parse(dependOnAttr);
-            }
-
-            const $placeHolderItem = $select.find(`option[value="${$select.val()}"]`);
-            if ($placeHolderItem.length) {
-                settings.placeHolder = $placeHolderItem.text() || settings.placeHolder;
-            }
-
-            $select.data(dataAttrs.instance, new ASelect($select, settings));
+    $.fn.aSelect = function (options) {
+        if (typeof options === 'string') {
+            const method = options;
+            return this.each(function () {
+                const instance = $(this).data(dataAttrs.instance);
+                if (instance && typeof instance[method] === 'function') {
+                    instance[method]();
+                }
+            });
         }
-    });
-};
+
+        const defaultOptions = $.fn.aSelect.defaults || {};
+        const settings = $.extend(
+            {
+                onOpen: null,
+                uniqueBy: [],
+                onClose: null,
+                onChange: null,
+                showClearButton: false,
+                quickLinks: "",
+                dependsOn: [],
+                ajaxUrl: null,
+                headers: [],
+                creatable: false,
+                hideExcluded: true,
+                placeHolder: "-- Select --",
+                getAjaxDefaultPayload: () => ({}),
+                id: generateUniqueId(),
+            },
+            defaultOptions,
+            options
+        );
+        return this.each(function () {
+            const $select = $(this);
+            if (!$select.data(dataAttrs.instance)) {
+                if ($select.attr(dataAttrs.quickLinks)) {
+                    settings.quickLinks = $($select.attr(dataAttrs.quickLinks)).prop("outerHTML");
+                }
+                if ($select.attr(dataAttrs.showClearButton)) {
+                    settings.showClearButton = $select.attr(dataAttrs.showClearButton) == "true";
+                }
+
+                if ($select.attr(dataAttrs.headers)) {
+                    settings.headers = $select.attr(dataAttrs.headers).split(",").map(h => h.trim());
+                }
+
+                if ($select.attr(dataAttrs.ajaxUrl)) {
+                    settings.ajaxUrl = $select.attr(dataAttrs.ajaxUrl);
+                }
+
+                if ($select.attr(dataAttrs.uniqueBy)) {
+                    settings.uniqueBy = $select.attr(dataAttrs.uniqueBy).split(",").map(h => h.trim());
+                }
+
+                if ($select.attr(dataAttrs.creatable)) {
+                    settings.creatable = $select.attr(dataAttrs.creatable) == "true";
+                }
+
+                if ($select.attr(dataAttrs.hideExcluded)) {
+                    settings.hideExcluded = $select.attr(dataAttrs.hideExcluded) == "true";
+                }
+
+                if ($select.attr(dataAttrs.multiple)) {
+                    settings.multiple = $select.prop(dataAttrs.multiple);
+                }
+
+                let dependOnAttr = $select.attr(dataAttrs.dependsOn);
+                if (dependOnAttr) {
+                    settings.dependsOn = JSON.parse(dependOnAttr);
+                }
+
+                const $placeHolderItem = $select.find(`option[value="${$select.val()}"]`);
+                if ($placeHolderItem.length) {
+                    settings.placeHolder = $placeHolderItem.text() || settings.placeHolder;
+                }
+
+                $select.data(dataAttrs.instance, new ASelect($select, settings));
+            }
+        });
+    };
 
 
-/** ------------------------
+    /** ------------------------
      *  Main Class
      *  ----------------------*/
     class ASelect {
@@ -1324,5 +1345,4 @@ $.fn.aSelect = function (options) {
 
 
     window.ASelect = ASelect;
-
-    export default ASelect;
+});

@@ -1,15 +1,1114 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "aSelect";
 }
 
-<select id="countrySelect" class="form-select">
-    <option value="">-- Select Country --</option>
-    <option value="1" data-name="Canada" data-code="CA">Canada</option>
-    <option value="2" data-name="India" data-code="IN">India</option>
-</select>
+<section id="overview" class="hero">
+    <div class="container py-5">
+        <div class="row g-4">
+            <div class="col-lg-7">
+                <h1 class="display-5 fw-bold mb-3">
+                    aSelect
+                </h1>
 
+                <p class="lead text-muted">
+                    The <strong>aSelect</strong> plugin transforms traditional HTML
+                    <code>&lt;select&gt;</code> elements into enhanced dropdown controls that
+                    display options in a tabular (grid) format.
+                </p>
+
+                <p class="text-muted">
+                    This provides a more visually rich and powerful selection experience,
+                    especially useful when options have multiple data attributes that
+                    need to be displayed clearly.
+                </p>
+
+                <div class="d-flex flex-wrap flex-column gap-2 mt-4">
+                    <span class="pill"><i class="bi bi-table"></i> Grid dropdown</span>
+                    <span class="pill"><i class="bi bi-search"></i> Search</span>
+                    <span class="pill"><i class="bi bi-keyboard"></i> Keyboard navigation</span>
+                    <span class="pill"><i class="bi bi-hdd-network"></i> Server-side</span>
+                    <span class="pill"><i class="bi bi-diagram-3"></i> Dependent fields</span>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Key Features</h5>
+
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Converts select elements into table-based dropdowns
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Supports both client-side and server-side data
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Pagination for large datasets
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Search and filter functionality
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Full keyboard navigation support
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Maintains original select element behavior
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Customizable events and callbacks
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Responsive design
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Dependent field support
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Clear button option
+                            </li>
+                            <li>
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Dynamic loading of server-side data
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="why-aselect" class="section border-top my-5 py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col text-center">
+                <h2 class="fw-bold">Why aSelect?</h2>
+                <p class="text-muted mt-2">
+                    Built to solve real-world dropdown challenges that traditional select wrappers struggle with.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Benefit 1 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-table text-primary me-2"></i>
+                            Structured, Tabular Data
+                        </h5>
+                        <p class="text-muted mb-0">
+                            Most select wrappers support search, but very few support a true
+                            tabular layout. Real-world selections often require more context
+                            than a single label.
+                        </p>
+                        <p class="text-muted mt-2">
+                            aSelect allows you to display multiple columns—such as Customer
+                            Name, Address, and Phone—inside the dropdown itself, without
+                            custom popovers or repeated UI logic as your application grows.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefit 2 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-infinity text-primary me-2"></i>
+                            Built for Massive Datasets
+                        </h5>
+                        <p class="text-muted mb-0">
+                            Dropdowns should not break when your data grows. Whether you
+                            have thousands or millions of records, aSelect handles it
+                            efficiently.
+                        </p>
+                        <p class="text-muted mt-2">
+                            With server-side integration, pagination, and infinite scrolling,
+                            aSelect loads data on demand—keeping forms fast, responsive,
+                            and scalable.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefit 3 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-layout-text-window text-primary me-2"></i>
+                            Cleaner, Smarter UI
+                        </h5>
+                        <p class="text-muted mb-0">
+                            Forms often need additional actions—like adding a new customer
+                            when the desired option doesn’t exist.
+                        </p>
+                        <p class="text-muted mt-2">
+                            Instead of cluttering the form with extra buttons near labels,
+                            aSelect lets you place contextual actions directly inside the
+                            dropdown, near the search—keeping the UI clean and intuitive.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section border-top my-5 py-5">
+    <div class="container">
+        <h2 class="section-title mb-3">Dependencies</h2>
+
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="fw-semibold mb-1">jQuery</h6>
+                        <p class="text-muted small mb-0">
+                            Core dependency used for DOM manipulation and events.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="fw-semibold mb-1">Popper.js</h6>
+                        <p class="text-muted small mb-0">
+                            Handles dropdown positioning logic.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="fw-semibold mb-1">Bootstrap</h6>
+                        <p class="text-muted small mb-0">
+                            Used for styling and tooltip support.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="install" class="section border-top my-5 py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <h2 class="section-title">Installation</h2>
+                <p class="text-muted">
+                    Include the required dependencies and the <strong>aSelect</strong> plugin
+                    after jQuery. You can use a CDN or host the files locally.
+                </p>
+            </div>
+        </div>
+
+        <!-- CDN install -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0">CDN Installation</h5>
+                            <span class="badge text-bg-primary">Recommended</span>
+                        </div>
+
+                        <p class="text-muted small mb-3">
+                            Quickest way to get started. Just copy and paste into your page.
+                        </p>
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="cdn-install-code">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+                        <pre id="cdn-install-code"><code>&lt;!-- jQuery --&gt;
+&lt;script src="https://code.jquery.com/jquery-3.7.1.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- Bootstrap CSS --&gt;
+&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+
+&lt;!-- Bootstrap JS (includes Popper) --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- aSelect --&gt;
+&lt;link rel="stylesheet" href="/aselect.css"&gt;
+&lt;script src="/aselect.umd.js"&gt;&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Local install -->
+        <div class="row g-4">
+            <div class="col-lg-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">Local Installation</h5>
+
+                        <p class="text-muted small mb-3">
+                            Download the plugin and host the files yourself.
+                        </p>
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="local-install-code">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+                        <pre id="local-install-code"><code>&lt;!-- Dependencies --&gt;
+&lt;script src="/lib/jquery/jquery.min.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"&gt;
+&lt;script src="/lib/bootstrap/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- aSelect plugin --&gt;
+&lt;link rel="stylesheet" href="/vendor/aselect/aselect.css"&gt;
+&lt;script src="/vendor/aselect/aselect.umd.js"&gt;&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="row mt-4">
+            <div class="col-lg-12">
+                <div class="alert alert-info">
+                    <strong>Note:</strong>
+                    Make sure jQuery is loaded <em>before</em> aSelect.
+                    Bootstrap is required for styling and tooltips.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <script>
-    $('#countrySelect').aSelect({
-        headers: ['name', 'code']
+    document.addEventListener("click", function (e) {
+        const btn = e.target.closest(".copy-btn");
+        if (!btn) return;
+
+        const targetId = btn.getAttribute("data-copy-target");
+        const codeEl = document.getElementById(targetId);
+        if (!codeEl) return;
+
+        const text = codeEl.innerText;
+
+        navigator.clipboard.writeText(text).then(() => {
+            const original = btn.innerHTML;
+            btn.innerHTML = '<i class="bi bi-check-lg me-1"></i>Copied';
+            btn.classList.remove("btn-outline-secondary");
+            btn.classList.add("btn-success");
+
+            setTimeout(() => {
+                btn.innerHTML = original;
+                btn.classList.add("btn-outline-secondary");
+                btn.classList.remove("btn-success");
+            }, 1500);
+        });
     });
 </script>
+<section id="usage" class="section border-top my-5 py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <h2 class="section-title">Basic Usage</h2>
+                <p class="text-muted">
+                    Initialize <strong>aSelect</strong> on an existing
+                    <code>&lt;select&gt;</code> element to transform it into a
+                    searchable, keyboard-friendly dropdown.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4 align-items-start">
+            <!-- Code example -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">Client-side data</h5>
+                        <p class="text-muted small">
+                            Use this approach when all options are already available in the DOM.
+                        </p>
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="basic-select-html">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+
+                        <pre id="basic-select-html"><code>&lt;select id="mySelect"&gt;
+                          &lt;option value="1"&gt;Option 1&lt;/option&gt;
+                          &lt;option value="2"&gt;Option 2&lt;/option&gt;
+                        &lt;/select&gt;</code></pre>
+
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="basic-select-js">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+                        <pre id="basic-select-js"><code>$('#mySelect').aSelect();</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live demo -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">Live Demo</h5>
+                        <p class="text-muted small">
+                            This select below is transformed using the exact code shown on the left.
+                        </p>
+
+                        <label class="form-label">Choose an option</label>
+                        <select id="basicUsageDemo" class="form-select">
+                            <option value="">-- Select --</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                        </select>
+
+                        <div class="alert alert-light small mt-3 mb-0">
+                            The original <code>&lt;select&gt;</code> remains in the DOM and continues
+                            to fire standard <code>change</code> events.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="usage-table" class="section border-top my-5 py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <h3 class="section-title">Table / Grid Layout</h3>
+                <p class="text-muted">
+                    If you want a <strong>table-like dropdown</strong>, you can define additional
+                    columns using HTML data attributes and specify which fields should be displayed
+                    using <code>data-headers</code>.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4 align-items-start">
+            <!-- Code example -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">With Data Attributes</h5>
+                        <p class="text-muted small">
+                            Each option provides multiple attributes that are rendered as columns
+                            in the dropdown.
+                        </p>
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="table-select-html">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+                        <pre id="table-select-html"><code>&lt;select id="productSelect" data-headers="intId,nvcName,decPrice,intCategory"&gt;
+                          &lt;option value="1"
+                                  data-intId="1"
+                                  data-nvcName="Product A"
+                                  data-decPrice="19.99"
+                                  data-intCategory="Electronics"&gt;
+                            Product A
+                          &lt;/option&gt;
+                          &lt;option value="2"
+                                  data-intId="2"
+                                    data-nvcName="Product B"
+                                    data-decPrice="29.99"
+                                    data-intCategory="Clothing"&gt;
+                            Product B
+                          &lt;/option&gt;
+                        &lt;/select&gt;</code></pre>
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="table-select-js">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+
+                        <pre id="table-select-js"><code>$('#productSelect').aSelect();</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live demo -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">Live Demo</h5>
+                        <p class="text-muted small">
+                            The dropdown below displays each option in a grid format.
+                        </p>
+
+                        <label class="form-label">Select a product</label>
+                        <select id="tableUsageDemo" data-headers="intId,nvcName,decPrice,intCategory">
+                            <option value="1"
+                                    data-intId="1"
+                                    data-nvcName="Product A"
+                                    data-decPrice="19.99"
+                                    data-intCategory="Electronics">
+                                Product A
+                            </option>
+                            <option value="2"
+                                    data-intId="2"
+                                    data-nvcName="Product B"
+                                    data-decPrice="29.99"
+                                    data-intCategory="Clothing">
+                                Product B
+                            </option>
+                        </select>
+
+                        <div class="alert alert-light small mt-3 mb-0">
+                            Column headers are generated from <code>data-headers</code>.
+                            The first camelCase segment (e.g. <code>int</code>, <code>nvc</code>,
+                            <code>dec</code>) is treated as a technical prefix and is not displayed.
+                            Header names use typed camelCase notation, where the first segment is a technical identifier (e.g. int, nvc, dec) and is not displayed.
+                            This allows headers to be reused for API field mapping and data type identification.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Server-side Data -->
+<section id="api" class="section border-top my-5 py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <h2 class="section-title">Server-side Data</h2>
+                <p class="text-muted">
+                    For large datasets, load data from the server by providing a URL.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4 align-items-start">
+            <!-- Server-side markup -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">HTML</h5>
+                        <p class="text-muted small">
+                            Add <code>data-url</code> to the select.
+                        </p>
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="cdn-install-code">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+
+
+                    <pre id="server-html"><code>&lt;select id="serverSelect" data-url="/api/orders"&gt;&lt;/select&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Server-side init -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">Initialize</h5>
+                        <p class="text-muted small">
+                            Initialize normally. The plugin will fetch rows from the endpoint.
+                        </p>
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="cdn-install-code">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+                        <pre id="server-init"><code>$('#serverSelect').aSelect();</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Response format -->
+            <div class="col-lg-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0">Server response format</h5>
+
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="server-response">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+
+<pre id="server-response"><code>{
+  "bitImplementPagination": true,
+  "vcSkippedColumns": "id,category",
+  "vcTextColumn": "name",
+  "vcValColumn": "id",
+  "data": [
+    {"id": 1, "name": "Product A", "price": 19.99, "category": "Electronics"},
+    {"id": 2, "name": "Product B", "price": 29.99, "category": "Clothing"}
+  ]
+}</code></pre>
+
+                        <div class="alert alert-light small mb-0">
+                            <strong>Tip:</strong> Use <code>vcSkippedColumns</code> to hide fields you don’t want displayed as columns.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Configuration Options -->
+<section id="options" class="section border-top my-5 py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <h2 class="section-title">Configuration Options</h2>
+                <p class="text-muted">
+                    Configure aSelect using JavaScript initialization options or HTML data attributes.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Init options -->
+            <div class="col-lg-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0">Initialization Options</h5>
+
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="init-options">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+
+<pre id="init-options"><code>$('#mySelect').aSelect({
+  // Basic options
+  id: 'custom-id',               // Custom ID for the instance
+  placeHolder: 'Select...',      // Placeholder text
+  showClearButton: true,         // Show clear button
+  quickLinks: '&lt;button&gt;Add New&lt;/button&gt;', // Custom HTML for quick links
+
+  // Server-side options
+  ajaxUrl: '/api/data',          // URL for server-side data
+  headers: ['id', 'name'],       // Column headers
+
+  // Callbacks
+  onOpen: function() { console.log('Dropdown opened'); },
+  onClose: function() { console.log('Dropdown closed'); },
+  onChange: function(newValue) { console.log('Selected:', newValue); },
+
+  // Dependent fields
+  dependsOn: [
+    { selector: '#divisionId', paramName: 'divisionId' }
+  ],
+
+  // AJAX payload
+  getAjaxDefaultPayload: function() {
+    return {
+      userId: 123,
+      token: 'abc123'
+    };
+  }
+});</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data attributes -->
+            <div class="col-lg-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">Data Attributes</h5>
+                        <p class="text-muted small mb-3">
+                            You can also configure options via HTML attributes:
+                        </p>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded-3 bg-white h-100">
+                                    <div class="fw-semibold"><code>data-url</code></div>
+                                    <div class="text-muted small">Server-side endpoint URL</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded-3 bg-white h-100">
+                                    <div class="fw-semibold"><code>data-headers</code></div>
+                                    <div class="text-muted small">Comma-separated list of column headers</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded-3 bg-white h-100">
+                                    <div class="fw-semibold"><code>data-show-clear-button</code></div>
+                                    <div class="text-muted small">"true" to show clear button</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded-3 bg-white h-100">
+                                    <div class="fw-semibold"><code>data-quicklink</code></div>
+                                    <div class="text-muted small">Selector for quick links HTML element</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Methods -->
+<section id="methods" class="section border-top my-5 py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <h2 class="section-title">Methods</h2>
+                <p class="text-muted">Interact with aSelect via standard jQuery patterns.</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">Get / Set Value</h5>
+
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="cdn-install-code">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+                        <pre id="getset"><code>// Get current value
+const value = $('#mySelect').val();
+
+// Set value
+$('#mySelect').val('2');</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">Destroy / Refresh</h5>
+
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="cdn-install-code">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+                        <pre id="destroy"><code>// Remove the aSelect instance
+$('#mySelect').aSelect('destroy');</code></pre>
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="cdn-install-code">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+                        <pre id="refresh"><code>// Refresh the instance
+$('#mySelect').aSelect('refresh');</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Events -->
+<section id="events" class="section border-top my-5 py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <h2 class="section-title">Events</h2>
+                <p class="text-muted">
+                    aSelect maintains normal select behavior, so you can keep using standard
+                    jQuery events. It also exposes plugin-specific events.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">Standard jQuery Events</h5>
+
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="cdn-install-code">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+                        <pre id="jquery-events"><code>$('#mySelect').on('change', function() {
+  console.log('Selected value:', $(this).val());
+});</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">Plugin-specific Events</h5>
+
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="cdn-install-code">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+                        <pre id="plugin-open"><code>$('#mySelect').on('aSelect:open', function() {
+  console.log('Dropdown opened');
+});</code></pre>
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="cdn-install-code">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+                        <pre id="plugin-close"><code>$('#mySelect').on('aSelect:close', function() {
+                            console.log('Dropdown closed');
+                        });</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Advanced Usage -->
+<section id="advanced" class="section border-top my-5 py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <h2 class="section-title">Advanced Usage</h2>
+                <p class="text-muted">Common advanced patterns for dynamic forms.</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">Dependent Fields</h5>
+
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="cdn-install-code">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+                        <pre id="depends"><code>$('#mySelect').aSelect({
+  dependsOn: [
+    { selector: '#country', paramName: 'countryId' },
+    { selector: '#region', paramName: 'regionId' }
+  ]
+});</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">Custom AJAX Payload</h5>
+
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="cdn-install-code">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+                        <pre id="payload"><code>$('#serverSelect').aSelect({
+  getAjaxDefaultPayload: function() {
+    return {
+      department: 'sales',
+      region: 'north'
+    };
+  }
+});</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-2">Handling Disabled State</h5>
+
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="cdn-install-code">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+                        <pre id="disabled"><code>// Disable the select
+$('#mySelect').prop('disabled', true);
+
+// Enable the select
+$('#mySelect').prop('disabled', false);</code></pre>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Multi-select -->
+<section id="multiselect" class="section border-top my-5 py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <h2 class="section-title">Multi-select</h2>
+                <p class="text-muted mb-0">
+                    Use the native <code>multiple</code> attribute on the select.
+                    Selected values display as removable chips. Click chips to deselect.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-grid d-sm-flex justify-content-sm-end mb-2">
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary copy-btn"
+                                    data-copy-target="cdn-install-code">
+                                <i class="bi bi-clipboard me-1"></i>Copy
+                            </button>
+                        </div>
+                        <pre id="multi-html"><code>&lt;select id="multiSelect" multiple&gt;
+  &lt;option value="1"&gt;Option 1&lt;/option&gt;
+  &lt;option value="2"&gt;Option 2&lt;/option&gt;
+  &lt;option value="3"&gt;Option 3&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+  $('#multiSelect').aSelect();
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Keyboard Navigation -->
+<section id="keyboard" class="section border-top my-5 py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <h2 class="section-title">Keyboard Navigation</h2>
+                <p class="text-muted">Supported keys:</p>
+            </div>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <div class="fw-semibold">Arrow Up / Down</div>
+                    <div class="text-muted small">Navigate through options</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <div class="fw-semibold">Enter</div>
+                    <div class="text-muted small">Select highlighted option</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <div class="fw-semibold">Escape</div>
+                    <div class="text-muted small">Close dropdown</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <div class="fw-semibold">Tab</div>
+                    <div class="text-muted small">Close dropdown and move to next element</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Styling -->
+<section id="styling" class="section border-top my-5 py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <h2 class="section-title">Styling</h2>
+                <p class="text-muted">
+                    The plugin adds CSS classes you can customize:
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <div class="fw-semibold"><code>.a-select-wrapper</code></div>
+                    <div class="text-muted small">Main container</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <div class="fw-semibold"><code>.a-select-display</code></div>
+                    <div class="text-muted small">Display element showing selected value</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <div class="fw-semibold"><code>.a-select-dropdown</code></div>
+                    <div class="text-muted small">Dropdown container</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <div class="fw-semibold"><code>.a-select-table-container</code></div>
+                    <div class="text-muted small">Scrollable table container</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <div class="fw-semibold"><code>.a-select-table</code></div>
+                    <div class="text-muted small">The options table</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <div class="fw-semibold"><code>.a-select-filter-container</code></div>
+                    <div class="text-muted small">Search/filter container</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <div class="fw-semibold"><code>.a-select-clear-button</code></div>
+                    <div class="text-muted small">Clear button</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <div class="fw-semibold"><code>.a-select-open</code></div>
+                    <div class="text-muted small">Added to wrapper when dropdown is open</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <div class="fw-semibold"><code>.a-select-disabled</code></div>
+                    <div class="text-muted small">Added to wrapper when disabled</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Browser Compatibility -->
+<section id="compatibility" class="section border-top my-5 py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <h2 class="section-title">Browser Compatibility</h2>
+                <p class="text-muted">
+                    The aSelect plugin supports all modern browsers and Internet Explorer 11+.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="p-4 border rounded-3 bg-white h-100">
+                    <div class="fw-semibold mb-2">Supported Browsers</div>
+                    <ul class="mb-0 small text-muted">
+                        <li>Chrome (latest)</li>
+                        <li>Firefox (latest)</li>
+                        <li>Edge</li>
+                        <li>Safari</li>
+                        <li>Internet Explorer 11+</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-4 border rounded-3 bg-white h-100">
+                    <div class="fw-semibold mb-2">IE11 Requirements</div>
+                    <p class="small text-muted mb-2">
+                        When using Internet Explorer 11, you may need to include polyfills for:
+                    </p>
+                    <ul class="mb-0 small text-muted">
+                        <li><code>MutationObserver</code></li>
+                        <li><code>Promise</code></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-light small mt-4 mb-0">
+            For best performance and full feature support, modern evergreen browsers are recommended.
+        </div>
+    </div>
+</section>
+
+
+
+@section Scripts {
+    <script>
+        $(function () {
+            $('#tableUsageDemo').aSelect({
+                showClearButton: true
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('#basicUsageDemo').aSelect({
+                showClearButton: true
+            });
+        });
+    </script>
+}
