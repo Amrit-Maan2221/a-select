@@ -22,12 +22,14 @@ const basePlugins = [
   commonjs(),
 
   postcss({
-    extract: "aselect.css",
-    minimize: isProd,
+    extract: "aselect.min.css",
+    minimize: true,
     plugins: [
       autoprefixer(),
-      isProd && cssnano(),
-    ].filter(Boolean),
+      cssnano({
+        preset: "default",
+      }),
+    ],
   }),
 
   babel({
