@@ -1,6 +1,6 @@
 {
   "name": "@amrit-maan/aselect",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Advanced select plugin with AJAX support",
   "main": "dist/aselect.cjs.js",
   "module": "dist/aselect.esm.js",
