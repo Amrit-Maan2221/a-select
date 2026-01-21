@@ -5,3 +5,9 @@
     background: #fff;
     isolation: isolate;
 }
+
+.app-logo {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
